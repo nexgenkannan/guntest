@@ -1,0 +1,33 @@
+<html>
+<h1>Test Table</h1>
+
+<form id="sign">
+	<input id="alias" placeholder="username">
+	<input id="pass" type="password" placeholder="passphrase">
+	<input id="in" type="submit" value="SignIn">
+	<input id="up" type="button" value="SignUp">
+</form>
+
+  <head>
+    <script src="gun.js"></script>
+    <script>
+      var gun = new Gun('http://localhost:8765/gun')
+      var user = gun.user();
+      $('#up').on('click', function(e){
+      user.create($('#alias').val(),$('#pass').val());
+      console.log("Created",ack.pub);
+      });
+
+      $('#sign').on('submit', function(e){
+      e.preventDefault();
+      user.auth($('#alias').val(),$('#pass').val());
+       gun.get("pub/" +ack.pub).put({hello: "world"});
+      });
+
+	user.recall({sessionStroage: true});
+
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
